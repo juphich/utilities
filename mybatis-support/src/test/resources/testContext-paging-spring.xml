@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <import resource="classpath:/testContext-common.xml"/>
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="#{testProperties['database.url']}"/>
+        <property name="username" value="#{testProperties['database.user']}"/>
+        <property name="password" value="#{testProperties['database.password']}"/>
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:/persistence/mybatis-configuration.xml"/>
+    </bean>
+    
+    <bean id="pagingQueryExecutor" class="net.jupic.mybatis.spring.PagingQueryExecutorFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="countSqlSourceClass" value="net.jupic.mybatis.sql.oracle.OracleCountSqlSource"/>
+        <property name="pagingSqlSourceClass" value="net.jupic.mybatis.sql.oracle.OraclePagingSqlSource"/>
+    </bean>
+    
+    <!-- 별도 sql session 사용 -->    
+    <bean id="sqlSessionFactorySecond" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:/persistence/mybatis-configuration.xml"/>
+    </bean>
+    
+    <bean id="paingQueryExecutorSecond" class="net.jupic.mybatis.spring.PagingQueryExecutorFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactorySecond"/>
+    </bean>
+    
+    <bean id="serviceGroupMapper" class="net.jupic.mybatis.spring.PagingMapperFactoryBean">
+        <property name="mapperInterface" value="net.jupic.mock.mapper.ServiceGroupMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactorySecond"/>
+    </bean>
+    
+    <bean id="serviceGroupDao" class="net.jupic.mock.dao.ServiceGroupDao">
+        <property name="pagingQueryExecutor" ref="paingQueryExecutorSecond"/>
+    </bean>
+</beans>

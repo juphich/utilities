@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+        
+    <description>Web application spring security extension tags</description>
+    <tlib-version>1.1</tlib-version>
+    <short-name>sec</short-name>
+    <uri>http://jupic.net/tags/security</uri>
+
+    <tag>
+        <name>loginFail</name>
+        <tag-class>net.jupic.spring.security.tags.LoginFailureCheckTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>var</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

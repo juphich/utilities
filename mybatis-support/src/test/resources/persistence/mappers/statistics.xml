@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="net.jupic.mock.mapper.StatisticsMapper">
+    <select id="selectStatisticsByNation" resultType="java.util.HashMap">
+    <![CDATA[
+        SELECT G.GROUP_ID
+              ,COUNT(*) AS TOTAL
+              ,CASE WHEN DATEDIFF(CURRENT_DATE, OCCURED_TIME) = 0 THEN COUNT(*) ELSE 0 END AS TODAY
+              ,CASE WHEN DATEDIFF(CURRENT_DATE, OCCURED_TIME) = 1 THEN COUNT(*) ELSE 0 END AS YESTERDAY
+              ,CASE WHEN DATEDIFF(CURRENT_DATE, OCCURED_TIME) <= 7 THEN COUNT(*) ELSE 0 END AS LESS_7DAYS
+              ,CASE WHEN DATEDIFF(CURRENT_DATE, OCCURED_TIME) <= 30 THEN COUNT(*) ELSE 0 END AS LESS_30DAYS
+              ,CASE WHEN DATEDIFF(CURRENT_DATE, OCCURED_TIME) <= 60 THEN COUNT(*) ELSE 0 END AS LESS_60DAYS
+              ,CASE WHEN DATEDIFF(CURRENT_DATE, OCCURED_TIME) > 60 THEN COUNT(*) ELSE 0 END AS BEFORE_60DAYS
+         FROM SERVICE_GROUP G
+             ,SERVICE_ERROR E
+        WHERE G.GROUP_ID = E.GROUP_ID
+        GROUP BY G.GROUP_ID
+    ]]>
+    </select>
+</mapper>

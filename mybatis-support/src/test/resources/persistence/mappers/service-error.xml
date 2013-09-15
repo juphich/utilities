@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.jupic.mock.mapper.ServiceErrorMapper"> 
+   
+    <!-- ServiceError Result Map -->
+    <resultMap id="ServiceError" type="net.jupic.mock.domain.ServiceError">
+        <id property="errorId" column="error_id"/>
+        <result property="exceptionName" column="exception_name"/>
+        <result property="currentUrl" column="current_url"/>
+        <result property="message" column="message"/>
+        <result property="trace" column="trace"/>
+        <result property="occuredTime" column="occured_time"/>
+        <result property="remoteIp" column="remote_ip"/>
+        <result property="urlRefferrer" column="url_refferrer"/>
+        <result property="customValue" column="custom_value"/>
+        <result property="reportedTime" column="reported_time"/>
+        
+        <association property="serviceGroup" javaType="net.jupic.mock.domain.ServiceGroup">
+            <id property="groupId" column="group_id"/>
+            <result property="serviceUrl" column="service_url"/>
+            <result property="nation" column="nation"/>
+            <result property="enabledGroup" column="enabled_group"/>
+        </association>
+    </resultMap>
+    
+    <select id="findErrorsByGroupId" 
+            parameterType="java.lang.String" 
+            resultMap="ServiceError">
+        SELECT G.GROUP_ID
+              ,G.SERVICE_URL
+              ,G.NATION
+              ,G.ENABLED_GROUP
+              ,E.ERROR_ID
+              ,E.EXCEPTION_NAME
+              ,E.MESSAGE
+              ,E.TRACE
+              ,E.OCCURED_TIME
+              ,E.REMOTE_IP
+              ,E.CURRENT_URL
+              ,E.URL_REFFERRER
+              ,E.CUSTOM_VALUE
+              ,E.REPORTED_TIME
+          FROM SERVICE_GROUP G
+              ,SERVICE_ERROR E
+         WHERE G.GROUP_ID = E.GROUP_ID
+           AND G.GROUP_ID = #{groupId}
+         ORDER BY G.GROUP_ID, E.ERROR_ID DESC
+    </select>
+    
+    <select id="findServiceErrors" 
+            parameterType="net.jupic.commons.model.Parameters" 
+            resultMap="ServiceError">
+        SELECT E.ERROR_ID
+              ,E.EXCEPTION_NAME
+              ,E.MESSAGE
+              ,E.TRACE
+              ,E.OCCURED_TIME
+              ,E.REMOTE_IP
+              ,E.CURRENT_URL
+              ,E.URL_REFFERRER
+              ,E.CUSTOM_VALUE
+              ,E.REPORTED_TIME
+              ,G.GROUP_ID
+              ,G.SERVICE_URL
+              ,G.NATION
+              ,G.ENABLED_GROUP
+          FROM SERVICE_GROUP G
+              ,SERVICE_ERROR E
+         WHERE G.GROUP_ID = E.GROUP_ID
+        <if test="searchType == 'groupId' and searchText != null and searchText != ''">
+           AND G.GROUP_ID = #{searchText}
+        </if>
+        <if test="searchType == 'errorUrl' and searchText != null and searchText != ''">
+           AND E.CURRENT_URL LIKE CONCAT('%',#{searchText},'%')
+        </if>
+        <if test="searchType == 'message' and searchText != null and searchText != ''">
+           AND(E.MESSAGE LIKE CONCAT('%',#{searchText},'%') 
+               OR E.TRACE LIKE CONCAT('%',#{searchText},'%'))
+        </if>
+        <if test="fromDate != null">
+        <![CDATA[
+           AND E.OCCURED_TIME >= #{fromDate}
+        ]]>
+        </if>
+        <if test="toDate != null">
+        <![CDATA[
+           AND E.OCCURED_TIME <= #{toDate}
+        ]]>
+        </if>
+         ORDER BY E.ERROR_ID DESC
+    </select>
+    
+    <select id="findErrorByErrorId" 
+            parameterType="int" 
+            resultMap="ServiceError">
+        SELECT G.GROUP_ID
+              ,G.SERVICE_URL
+              ,G.NATION
+              ,G.ENABLED_GROUP
+              ,E.ERROR_ID
+              ,E.EXCEPTION_NAME
+              ,E.MESSAGE
+              ,E.TRACE
+              ,E.OCCURED_TIME
+              ,E.REMOTE_IP
+              ,E.CURRENT_URL
+              ,E.URL_REFFERRER
+              ,E.CUSTOM_VALUE
+              ,E.REPORTED_TIME
+          FROM SERVICE_GROUP G
+              ,SERVICE_ERROR E
+         WHERE G.GROUP_ID = E.GROUP_ID
+           AND E.ERROR_ID = #{errorId}
+    </select>
+    
+    <insert id="insertServiceError" 
+            parameterType="net.jupic.mock.domain.ServiceError">
+        INSERT INTO SERVICE_ERROR(GROUP_ID
+                    ,EXCEPTION_NAME
+                    ,MESSAGE
+                    ,TRACE
+                    ,OCCURED_TIME
+                    ,REMOTE_IP
+                    ,CURRENT_URL
+                    ,URL_REFFERRER
+                    ,CUSTOM_VALUE
+                    ,REPORTED_TIME)
+               VALUES(#{serviceGroup.groupId}
+                    ,#{exceptionName}
+                    ,#{message}
+                    ,#{trace}
+                    ,#{occuredTime}
+                    ,#{remoteIp}
+                    ,#{currentUrl}
+                    ,#{urlRefferrer}
+                    ,#{customValue}
+                    ,now())
+               
+    </insert>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="net.jupic.mock.mapper.ServiceGroupMapper">
+    <select id="findServiceGroupList" 
+            resultType="net.jupic.mock.domain.ServiceGroup">
+        SELECT GROUP_ID
+              ,SERVICE_URL
+              ,NATION
+              ,ENABLED_GROUP
+          FROM SERVICE_GROUP
+    </select>
+    
+    <select id="findServiceGroup" 
+            parameterType="java.lang.String" 
+            resultType="net.jupic.mock.domain.ServiceGroup">
+        SELECT GROUP_ID
+              ,SERVICE_URL
+              ,NATION
+              ,ENABLED_GROUP
+          FROM SERVICE_GROUP
+         WHERE GROUP_ID = #{groupId}
+    </select>
+    
+    <insert id="insertServiceGroup" 
+            parameterType="net.jupic.mock.domain.ServiceGroup">
+        INSERT INTO SERVICE_GROUP(GROUP_ID
+                    ,SERVICE_URL
+                    ,NATION
+                    ,ENABLED_GROUP)
+               VALUES(#{groupId}
+                    ,#{serviceUrl}
+                    ,#{nation}
+                    ,#{enabledGroup})
+               
+    </insert>
+    
+    <update id="updateServiceGroup"
+            parameterType="net.jupic.mock.domain.ServiceGroup">
+        UPDATE SERVICE_GROUP
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="serviceUrl != null"  >,SERVICE_URL = #{serviceUrl}</if>
+            <if test="nation != null"      >,NATION = #{nation}</if>
+            <if test="enabledGroup != null">,ENABLED_GROUP = #{enabledGroup}</if>
+        </trim>
+         WHERE GROUP_ID = #{groupId}
+    </update>
+    
+    <delete id="deleteServiceGroup" parameterType="java.lang.String">
+        DELETE FROM SERVICE_GROUP WHERE GROUP_ID = #{groupId}
+    </delete>
+</mapper>

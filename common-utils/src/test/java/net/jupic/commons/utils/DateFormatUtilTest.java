@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import net.jupic.commons.utils.DateFormatUtils;
-
 import org.junit.Test;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;

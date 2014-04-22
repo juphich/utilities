@@ -3,8 +3,6 @@ package net.jupic.commons.utils;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-import net.jupic.commons.utils.FilePathBuilder;
-
 import org.junit.Test;
 
 public class PathBuilderTest {

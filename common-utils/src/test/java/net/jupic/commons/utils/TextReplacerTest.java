@@ -1,14 +1,11 @@
 package net.jupic.commons.utils;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-import static org.hamcrest.core.Is.is;
-
 import net.jupic.commons.exception.UtilityUsageException;
-import net.jupic.commons.utils.TextReplacer;
 
 import org.junit.Test;
-
 
 /**
  * @author Chang jung pil

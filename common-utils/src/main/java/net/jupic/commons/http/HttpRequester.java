@@ -5,7 +5,6 @@ import net.jupic.commons.http.exception.HttpRequestException;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 
-
 public interface HttpRequester {
 
 	String request() throws HttpResponseException;

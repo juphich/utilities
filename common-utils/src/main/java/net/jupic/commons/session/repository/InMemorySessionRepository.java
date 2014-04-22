@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
  */
 public class InMemorySessionRepository implements SessionRepository {
 
-	private static Logger logger = LoggerFactory.getLogger(InMemorySessionRepository.class);
+private static Logger logger = LoggerFactory.getLogger(InMemorySessionRepository.class);
 	
 	private Map<Serializable, GaSession> sessions;
 
@@ -72,7 +72,6 @@ public class InMemorySessionRepository implements SessionRepository {
 					sessions.remove(entry.getKey());
 				}
 				
-				//System.out.println("session ("+ entry.getKey() + ") has been expired!! time : " + new Date(System.currentTimeMillis()));
 				if (logger.isDebugEnabled()) {
 					logger.debug("session ({}) has been expired!! time : {}", entry.getKey(), new Date(System.currentTimeMillis()));
 				}

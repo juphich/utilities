@@ -12,7 +12,6 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-
 public class GetRequester extends AbstractHttpRequester {
 	
 	GetRequester(GetRequestContext context) throws RequesterCreationException {
@@ -26,6 +25,7 @@ public class GetRequester extends AbstractHttpRequester {
 		
 		try {
 			HttpGet httpGet = new HttpGet(getRequestUri());
+			this.applyHeaders(httpGet);
 			
 			if (log.isDebugEnabled()) {
 				log.debug("http request... : " + httpGet.getURI());

@@ -5,11 +5,9 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Date;
 
-import net.jupic.commons.session.GaSessionContext;
 import net.jupic.commons.session.manager.GaSessionManager;
 import net.jupic.commons.session.manager.SessionManager;
 import net.jupic.commons.session.monitor.SessionMonitor;
-
 
 public class SessionMonitorTest {
 

@@ -9,7 +9,6 @@ import net.jupic.commons.http.handler.AbstractMappingHandler;
 
 import org.apache.http.HttpResponse;
 
-
 public class MockMessageHandler extends AbstractMappingHandler<Message> {
 
 	@Override

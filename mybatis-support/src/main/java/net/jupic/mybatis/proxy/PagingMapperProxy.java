@@ -1,6 +1,7 @@
 package net.jupic.mybatis.proxy;
 
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -48,8 +49,8 @@ public class PagingMapperProxy implements InvocationHandler, Serializable {
 	}
 	
 	private boolean isAvailablePaging(Method method) {
-		if (method.getReturnType().isAssignableFrom(Page.class)
-				&& method.getAnnotation(Statement.class) != null) {
+		if ((method.getReturnType() != Object.class && method.getReturnType().isAssignableFrom(Page.class))
+				|| (method.getAnnotation(Statement.class) != null && method.getReturnType().isAssignableFrom(Page.class))) {
 			return true;
 		} else {
 			return false;
@@ -78,7 +79,7 @@ public class PagingMapperProxy implements InvocationHandler, Serializable {
 		}
 		
 		Object execute(Object[] args) {
-			Statement statement = method.getAnnotation(Statement.class);
+			Statement statement = obtainStatementFormMethod(method);
 			
 			if (MappingMode.MANUAL.equals(getMode(statement))) {
 				String pagingStatement = getPaingStatementId(statement);
@@ -107,6 +108,40 @@ public class PagingMapperProxy implements InvocationHandler, Serializable {
 			} else {
 				throw new IllegalArgumentException(
 						"(page, count) and id and value parameters could not be setting together on Statement Annotation.");
+			}
+		}
+		
+		private Statement obtainStatementFormMethod(final Method method) {
+			Statement statement = method.getAnnotation(Statement.class);
+			
+			if (statement != null) {				
+				return statement;
+			} else {
+				return new Statement() {
+					@Override public Class<? extends Annotation> annotationType() {
+						return Statement.class;
+					}
+
+					@Override public String value() {
+						return "";
+					}
+
+					@Override public String id() {
+						return method.getName();
+					}
+
+					@Override public Class<?>[] mapper() {
+						return new Class<?>[0];
+					}
+
+					@Override public String page() {
+						return "";
+					}
+
+					@Override public String count() {
+						return "";
+					}					
+				};
 			}
 		}
 		

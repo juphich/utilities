@@ -1,9 +1,7 @@
 package net.jupic.commons.utils;
 
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
-
-import net.jupic.commons.utils.ShellExecutor;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 

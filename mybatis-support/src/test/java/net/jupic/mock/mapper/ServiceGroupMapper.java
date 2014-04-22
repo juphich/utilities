@@ -15,7 +15,7 @@ import net.jupic.mybatis.annotation.Statement;
 @Mapper
 public interface ServiceGroupMapper {
 
-	List<ServiceGroup> findServiceGroupList();
+List<ServiceGroup> findServiceGroupList();
 	
 	ServiceGroup findServiceGroup(String groupId);
 	
@@ -27,4 +27,6 @@ public interface ServiceGroupMapper {
 
 	@Statement(mapper=ServiceGroupMapper.class, id="findServiceGroupList")
 	Page<ServiceGroup> findPaginatedServiceGroupList(Parameters parameters);
+	
+	Page<ServiceGroup> search(Parameters parameters);
 }

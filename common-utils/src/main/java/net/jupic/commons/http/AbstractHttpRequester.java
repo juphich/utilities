@@ -8,12 +8,12 @@ import net.jupic.commons.http.context.HttpRequestContext;
 import net.jupic.commons.http.exception.HttpRequestException;
 import net.jupic.commons.http.exception.RequesterCreationException;
 
+import org.apache.http.HttpMessage;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.params.HttpParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 public abstract class AbstractHttpRequester implements HttpRequester {
 
@@ -52,6 +52,14 @@ public abstract class AbstractHttpRequester implements HttpRequester {
 		if (httpParams != null) {
 			for (Entry<String, Object> entry : httpParams.entrySet()) {
 				parameters.setParameter(entry.getKey(), entry.getValue());
+			}
+		}
+	}
+	
+	protected void applyHeaders(HttpMessage httpMessage) {
+		if (headers != null && !headers.isEmpty()) {
+			for (Entry<String, String> entry : headers.entrySet()) {
+				httpMessage.addHeader(entry.getKey(), entry.getValue());
 			}
 		}
 	}

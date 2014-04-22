@@ -112,5 +112,9 @@ public class PagingProxyMapperTest {
 		Page<ServiceGroup> paginated = serviceGroupMapper.findPaginatedServiceGroupList(new ServiceSearchParameters());
 		
 		assertEquals(groups.size(), paginated.getTotalRows());
+		
+		Page<ServiceGroup> groups2 = serviceGroupMapper.search(new ServiceSearchParameters());
+		
+		assertEquals(groups2.getList().size(), paginated.getList().size());
 	}
 }

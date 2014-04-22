@@ -20,7 +20,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-
 public class PostRequester extends AbstractHttpRequester {
 
 	private Map<String, String[]> formParameters;
@@ -51,7 +50,9 @@ public class PostRequester extends AbstractHttpRequester {
 		
 		try {
 			HttpPost httpPost = new HttpPost(getRequestUri());
+			this.applyHeaders(httpPost);
 			httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			
 			if (log.isDebugEnabled()) {
 				log.debug("http request... : " + httpPost.getURI());
 			}

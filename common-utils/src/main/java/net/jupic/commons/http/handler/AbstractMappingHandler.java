@@ -15,7 +15,6 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public abstract class AbstractMappingHandler<T> implements ResponseHandler<T> {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());

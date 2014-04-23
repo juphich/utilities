@@ -10,7 +10,6 @@
     <modules>
     	<module>mybatis-support</module>
     	<module>model-api</module>
-    	<module>common-utils</module>
     	<module>spring-extensions</module>
     </modules>
     
@@ -188,6 +187,13 @@
                         <artifactId>jmxri</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            
+            <!-- custom libraries -->
+            <dependency>
+                <groupId>net.toolab</groupId>
+                <artifactId>toolab-utils</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
         
             <!-- junit testing dependency as test scope -->

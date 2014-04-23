@@ -50,6 +50,18 @@
         </plugins>
     </build>
     
+    <repositories>
+	    <repository>
+	        <id>jupic-snapshot</id>
+	        <url>https://github.com/juphich/juphich-maven-repository/raw/master/snapshots</url>
+	    </repository>
+
+	    <repository>
+	        <id>jupic-releases</id>
+	        <url>https://github.com/juphich/juphich-maven-repository/raw/master/releases</url>
+	    </repository>
+    </repositories>
+    
     <dependencyManagement>
         <dependencies>
             <!-- springframework -->

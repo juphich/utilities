@@ -8,9 +8,9 @@
     <description>Common modules projects</description>
 
     <modules>
-    	<module>mybatis-support</module>
-    	<module>model-api</module>
-    	<module>spring-extensions</module>
+        <module>mybatis-support</module>
+        <module>model-api</module>
+        <module>spring-extensions</module>
     </modules>
     
     <properties>
@@ -51,15 +51,15 @@
     </build>
     
     <repositories>
-	    <repository>
-	        <id>jupic-snapshot</id>
-	        <url>https://github.com/juphich/juphich-maven-repository/raw/master/snapshots</url>
-	    </repository>
+        <repository>
+            <id>jupic-snapshot</id>
+            <url>https://github.com/juphich/juphich-maven-repository/raw/master/snapshots</url>
+        </repository>
 
-	    <repository>
-	        <id>jupic-releases</id>
-	        <url>https://github.com/juphich/juphich-maven-repository/raw/master/releases</url>
-	    </repository>
+        <repository>
+            <id>jupic-releases</id>
+            <url>https://github.com/juphich/juphich-maven-repository/raw/master/releases</url>
+        </repository>
     </repositories>
     
     <dependencyManagement>

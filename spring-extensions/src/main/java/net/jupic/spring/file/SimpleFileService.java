@@ -9,10 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import net.jupic.commons.utils.FilePathBuilder;
 import net.jupic.spring.file.exception.FileSizeOverException;
 import net.jupic.spring.file.exception.FileUploadException;
 import net.jupic.spring.file.exception.FileUploadPolicyViolationException;
+import net.toolab.utils.FilePathBuilder;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

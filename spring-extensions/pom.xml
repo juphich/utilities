@@ -30,13 +30,6 @@
     </build>
     
     <dependencies>
-    	<!-- commons -->
-    	<dependency>
-    		<groupId>${project.groupId}</groupId>
-    		<artifactId>common-utils</artifactId>
-            <version>${project.version}</version>
-    	</dependency>
-        
         <!-- springframework -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -91,6 +84,12 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
+        </dependency>
+        
+        <!-- custom libraries -->
+        <dependency>
+            <groupId>net.toolab</groupId>
+            <artifactId>toolab-utils</artifactId>
         </dependency>
         
         <!-- junit testing dependency as test scope -->

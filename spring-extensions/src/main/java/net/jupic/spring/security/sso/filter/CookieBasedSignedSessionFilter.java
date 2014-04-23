@@ -5,10 +5,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.jupic.commons.utils.WebRequestUtils;
 import net.jupic.spring.security.sso.SignedSession;
 import net.jupic.spring.security.sso.SignedSessionAuthenticationToken;
 import net.jupic.spring.security.sso.SignedSessionService;
+import net.toolab.utils.WebRequestUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;

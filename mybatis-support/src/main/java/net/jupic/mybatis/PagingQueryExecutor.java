@@ -4,9 +4,9 @@ import java.util.List;
 
 import net.jupic.commons.model.Page;
 import net.jupic.commons.model.PageParameters;
-import net.jupic.commons.utils.ReflectionUtils;
 import net.jupic.mybatis.model.DefaultPage;
 import net.jupic.mybatis.sql.QueryType;
+import net.toolab.utils.ReflectionUtils;
 
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;

@@ -4,8 +4,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.jupic.commons.utils.WebRequestUtils;
 import net.jupic.spring.security.sso.SignedSessionService;
+import net.toolab.utils.WebRequestUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

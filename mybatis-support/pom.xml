@@ -58,12 +58,6 @@
             <version>${project.version}</version>
         </dependency>
         
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>common-utils</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -80,6 +74,12 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
+        </dependency>
+        
+        <!-- custom libraries -->
+        <dependency>
+            <groupId>net.toolab</groupId>
+            <artifactId>toolab-utils</artifactId>
         </dependency>
         
         <!-- junit testing dependency as test scope -->
